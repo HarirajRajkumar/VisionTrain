@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Camera Capture for TensorFlow Training</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Camera Capture for TensorFlow Training</h1>
+    </header>
+    
+    <div class="main-content">
+      <!-- Camera View -->
+      <div class="camera-container">
+        <div class="camera-controls">
+          <button id="startCameraBtn">Start Camera</button>
+          <select id="cameraSelect" disabled>
+            <option value="">Loading cameras...</option>
+          </select>
+          <select id="resolutionSelect">
+            <option value="640,480">640x480</option>
+            <option value="1280,720">1280x720</option>
+            <option value="1920,1080">1920x1080</option>
+          </select>
+        </div>
+        
+        <div class="video-container">
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" style="display:none;"></canvas>
+        </div>
+        
+        <button id="captureBtn" disabled>Capture Image</button>
+      </div>
+      
+      <!-- Settings Panel -->
+      <div class="settings-panel">
+        <div class="project-settings">
+          <h3>Project Settings</h3>
+          <div class="setting-group">
+            <label for="projectFolder">Project Folder:</label>
+            <div class="input-with-button">
+              <input type="text" id="projectFolder" placeholder="/path/to/project" readonly>
+              <button id="selectFolderBtn">Select Folder</button>
+            </div>
+            <div id="saveLocationDisplay" class="save-location"></div>
+          </div>
+          
+          <div class="setting-group">
+            <label for="currentLabel">Current Label:</label>
+            <select id="currentLabel">
+              <option value="">Select a label</option>
+              <option value="dog">dog</option>
+              <option value="cat">cat</option>
+              <option value="car">car</option>
+              <option value="person">person</option>
+            </select>
+          </div>
+          
+          <div class="setting-group">
+            <label for="newLabel">Add New Label:</label>
+            <div class="input-with-button">
+              <input type="text" id="newLabel" placeholder="Enter new label">
+              <button id="addLabelBtn">Add</button>
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <label>Current Location:</label>
+            <div id="locationDisplay" class="location-info">
+              Retrieving location...
+            </div>
+          </div>
+        </div>
+        
+        <!-- Captured Images -->
+        <div class="captured-images">
+          <h3>Captured Images</h3>
+          <div class="images-header">
+            <span>Total: <span id="imageCount">0</span> images</span>
+            <div>
+              <button id="downloadImagesBtn" disabled>Download Images</button>
+              <button id="exportMetadataBtn" disabled>Export Metadata</button>
+            </div>
+          </div>
+          
+          <div id="imageGallery" class="image-gallery"></div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div id="statusBar">Ready</div>
+    </footer>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html>

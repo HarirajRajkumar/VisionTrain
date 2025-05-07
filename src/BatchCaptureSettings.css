@@ -1,0 +1,186 @@
+/* BatchCaptureSettings.css */
+
+.batch-capture-settings {
+  background-color: white;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.batch-capture-settings h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.batch-resolution-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+.resolution-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resolution-table th,
+.resolution-table td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.resolution-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.resolution-table tr:last-child td {
+  border-bottom: none;
+}
+
+.resolution-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.count-input {
+  width: 60px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.total-label {
+  text-align: right;
+  font-weight: bold;
+}
+
+.total-count {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.batch-options {
+  margin-bottom: 1rem;
+}
+
+.option-group {
+  margin-bottom: 0.5rem;
+}
+
+.option-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.delay-input {
+  width: 80px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  margin-right: 0.5rem;
+}
+
+.start-batch-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.start-batch-btn:hover {
+  background-color: #218838;
+}
+
+.start-batch-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.batch-progress {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.progress-info {
+  margin-bottom: 1rem;
+}
+
+.progress-info p {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.progress-bar-container {
+  height: 20px;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #28a745;
+  transition: width 0.5s ease;
+}
+
+.progress-percentage {
+  font-weight: bold;
+  color: #28a745;
+}
+
+.batch-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.batch-controls button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.pause-btn, .resume-btn {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.pause-btn:hover, .resume-btn:hover {
+  background-color: #e0a800;
+}
+
+.stop-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.stop-btn:hover {
+  background-color: #c82333;
+}

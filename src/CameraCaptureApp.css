@@ -1,0 +1,102 @@
+import React, { useState } from 'react';
+import './BatchCaptureSettings.css';
+
+// List of OV2640 and common resolutions
+const RESOLUTIONS = [
+  { width: 160, height: 120, label: 'QQVGA (160x120)' },
+  { width: 320, height: 240, label: 'QVGA (320x240)' },
+  { width: 640, height: 480, label: 'VGA (640x480)' },
+  { width: 800, height: 600, label: 'SVGA (800x600)' },
+  { width: 1024, height: 768, label: 'XGA (1024x768)' },
+  { width: 1280, height: 720, label: 'HD (1280x720)' },
+  { width: 1280, height: 1024, label: 'SXGA (1280x1024)' },
+  { width: 1600, height: 1200, label: 'UXGA (1600x1200)' },
+  { width: 1920, height: 1080, label: 'FHD (1920x1080)' },
+];
+
+function BatchCaptureSettings({
+  isActive,
+  onStartBatch,
+  onPauseBatch,
+  onStopBatch,
+  isBatchRunning,
+  isPaused,
+  progress,
+  currentResolution,
+  currentCount
+}) {
+  // State for batch settings
+  const [captureSettings, setCaptureSettings] = useState(
+    RESOLUTIONS.map(res => ({
+      width: res.width,
+      height: res.height,
+      count: 0,
+      enabled: false
+    }))
+  );
+  const [captureDelay, setCaptureDelay] = useState(2);
+  const [randomizeOrder, setRandomizeOrder] = useState(false);
+
+  // Handle resolution count change
+  const handleCountChange = (index, count) => {
+    const newSettings = [...captureSettings];
+    // Ensure count is a positive integer
+    const validCount = Math.max(0, parseInt(count) || 0);
+    newSettings[index] = {
+      ...newSettings[index],
+      count: validCount,
+      enabled: validCount > 0
+    };
+    setCaptureSettings(newSettings);
+  };
+
+  // Handle toggle for a specific resolution
+  const handleToggleResolution = (index) => {
+    const newSettings = [...captureSettings];
+    newSettings[index].enabled = !newSettings[index].enabled;
+    // If enabling, ensure count is at least 1
+    if (newSettings[index].enabled && newSettings[index].count === 0) {
+      newSettings[index].count = 1;
+    }
+    setCaptureSettings(newSettings);
+  };
+
+  // Calculate total images to capture
+  const totalImages = captureSettings.reduce((sum, setting) => 
+    sum + (setting.enabled ? setting.count : 0), 0);
+
+  // Start batch capture
+  const handleStartBatch = () => {
+    // Filter out enabled settings with count > 0
+    const activeSettings = captureSettings
+      .filter(setting => setting.enabled && setting.count > 0)
+      .map(({ width, height, count }) => ({ width, height, count }));
+    
+    if (activeSettings.length === 0) {
+      alert('Please select at least one resolution and set a count greater than 0');
+      return;
+    }
+
+    onStartBatch(activeSettings, captureDelay, randomizeOrder);
+  };
+
+  // If not active, don't render
+  if (!isActive) return null;
+
+  return (
+    <div className="batch-capture-settings">
+      <h3>Automatic Capture Settings</h3>
+      
+      {!isBatchRunning ? (
+        <>
+          <div className="batch-resolution-list">
+            <table className="resolution-table">
+              <thead>
+                <tr>
+                  <th>Enable</th>
+                  <th>Resolution</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                {captureSettings.map((setting, index) =>
